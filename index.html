@@ -14,24 +14,13 @@
   </header>
   <div class="layout">
     <aside class="sidebar">
-      <div class="navgroup">TEAM</div>
+      <div class="navgroup">KINGS</div>
       <button class="nav active" data-page="home">◈ <span>Overview</span></button>
       <button class="nav" data-page="schedule">▦ <span>Schedule</span></button>
-      <button class="nav" data-page="game">◉ <span>Game Center</span></button>
-      <button class="nav" data-page="roster">♙ <span>Roster & Stats</span></button>
-      <button class="nav" data-page="injuries">✚ <span>Injuries</span></button>
-      <div class="navgroup">LEAGUE</div>
       <button class="nav" data-page="standings">≡ <span>Standings</span></button>
-      <button class="nav" data-page="matchup">⚔ <span>Head-to-Head</span></button>
-      <button class="nav" data-page="cap">$ <span>Salary Cap</span></button>
-      <div class="navgroup">NEWS & MORE</div>
-      <button class="nav" data-page="rumours">↗ <span>Trade Rumours</span></button>
-      <button class="nav" data-page="tracker">⇄ <span>Trade Tracker</span></button>
-      <button class="nav" data-page="watch">▶ <span>Watch & Listen</span></button>
-      <button class="nav" data-page="prospects">★ <span>Prospects</span></button>
     </aside>
     <main class="main">
-      <div class="mobile-nav"><select id="mobileMenu" aria-label="Navigate"><option value="home">Overview</option><option value="schedule">Schedule</option><option value="game">Game Center</option><option value="roster">Roster & Stats</option><option value="injuries">Injuries</option><option value="standings">Standings</option><option value="matchup">Head-to-Head</option><option value="cap">Salary Cap</option><option value="rumours">Trade Rumours</option><option value="tracker">Trade Tracker</option><option value="watch">Watch & Listen</option><option value="prospects">Prospects</option></select></div>
+      <div class="mobile-nav"><select id="mobileMenu" aria-label="Navigate"><option value="home">Overview</option><option value="schedule">Schedule</option><option value="standings">Standings</option></select></div>
       <div id="status" class="status" role="status">Loading live NHL data…</div>
       <section class="page active" id="page-home">
         <div class="hero">
@@ -52,23 +41,10 @@
           <article class="metric"><label>GOALS / GAME</label><strong id="gpg">—</strong><small>Team average</small></article>
           <article class="metric"><label>LIVE DATA</label><strong id="updated">—</strong><small>Last refresh</small></article>
         </div>
-        <div class="columns">
-          <article class="card"><div class="cardhead"><h2>TEAM UPDATES</h2><span class="tag">LIVE FEEDS</span></div><div id="home-news" class="list"><p class="muted">News feeds will appear here when available.</p></div></article>
-          <article class="card"><div class="cardhead"><h2>WESTERN CONFERENCE</h2><button class="textbutton" data-go="standings">FULL TABLE ↗</button></div><div id="mini-standings" class="list"><p class="muted">Loading standings…</p></div></article>
-        </div>
-        <article class="card watch-card"><div class="cardhead"><h2>MY PLAYER WATCHLIST</h2><span class="tag">SAVED ON THIS DEVICE</span></div><p class="muted">Add players from Roster & Stats to follow their season totals here.</p><div id="watchlist" class="list"></div></article>
+        <article class="card overview-standings"><div class="cardhead"><h2>WESTERN CONFERENCE</h2><button class="textbutton" data-go="standings">FULL STANDINGS ↗</button></div><div id="mini-standings" class="list"><p class="muted">Loading standings…</p></div></article>
       </section>
       <section class="page" id="page-schedule"><div class="pagehead"><p class="eyebrow">2026–27 SEASON</p><h1>Schedule & Results</h1><p>Upcoming games, scores, home and away matchups.</p></div><div class="card"><div class="cardhead"><h2>LA KINGS SCHEDULE</h2><button class="textbutton" id="refreshSchedule">REFRESH ↻</button></div><div id="schedule-list" class="tablewrap"><p class="muted">Loading schedule…</p></div></div></section>
-      <section class="page" id="page-game"><div class="pagehead"><p class="eyebrow">GAME DAY</p><h1>Game Center</h1><p>Live score, period, scoring plays, penalties, shots and box score.</p></div><div id="gamecenter" class="card"><p class="muted">Select a game from the schedule or wait for the next matchup.</p></div></section>
-      <section class="page" id="page-roster"><div class="pagehead"><p class="eyebrow">TEAM PERSONNEL</p><h1>Roster & Stats</h1><p>Current players and season statistics. Add players to your personal watchlist.</p></div><div class="card"><div class="cardhead"><h2>ROSTER</h2><input id="rosterSearch" placeholder="Search players…" aria-label="Search players"></div><div id="roster-list" class="tablewrap"><p class="muted">Loading roster…</p></div></div></section>
-      <section class="page" id="page-injuries"><div class="pagehead"><p class="eyebrow">PLAYER AVAILABILITY</p><h1>Injuries & Lineup</h1><p>Only show injury information when a source provides it; NHL public endpoints may not expose a complete official injury report.</p></div><div class="card"><div class="cardhead"><h2>AVAILABILITY</h2><span class="tag">SOURCE-DEPENDENT</span></div><p class="muted">This page intentionally does not guess injury status or return dates. Check official team updates and linked reporting before relying on a player's availability.</p><a class="source-link" href="https://www.nhl.com/kings" target="_blank" rel="noopener">Official LA Kings updates ↗</a></div></section>
-      <section class="page" id="page-standings"><div class="pagehead"><p class="eyebrow">WESTERN CONFERENCE</p><h1>Standings</h1><p>Conference standings and playoff picture.</p></div><div class="card"><div id="standings-table" class="tablewrap">Loading standings…</div></div></section>
-      <section class="page" id="page-matchup"><div class="pagehead"><p class="eyebrow">OPPONENT SCOUTING</p><h1>Head-to-Head</h1><p>Compare the Kings against any NHL opponent.</p></div><div class="card"><div class="cardhead"><h2>SELECT OPPONENT</h2><select id="opponentSelect" aria-label="Select opponent"></select></div><div id="headtohead" class="list"><p class="muted">Select a team to see recent meetings when schedule data is available.</p></div></div></section>
-      <section class="page" id="page-cap"><div class="pagehead"><p class="eyebrow">CONTRACT MANAGEMENT</p><h1>Salary Cap</h1><p>Cap hits, available space, contract terms and free-agent status.</p></div><div class="card"><div class="cardhead"><h2>CAP SHEET</h2><span class="tag">VERIFY CONTRACT DATA</span></div><p class="muted">The public NHL score, roster and stats feeds do not provide a complete, authoritative salary-cap ledger. This section is prepared for sourced contract data; no cap space or cap hit is fabricated.</p><a class="source-link" href="https://www.capfriendly.com/teams/kings" target="_blank" rel="noopener">View Kings contract data ↗</a></div></section>
-      <section class="page" id="page-rumours"><div class="pagehead"><p class="eyebrow">AROUND THE LEAGUE</p><h1>Trade Rumours</h1><p>Rumours and reporting, kept separate from confirmed transactions.</p></div><div class="card"><p class="muted">No live rumour feed is bundled into this static GitHub Pages site. Headlines should be added only with a source, publication date, and clear rumour/report label.</p><a class="source-link" href="https://www.nhl.com/kings/news" target="_blank" rel="noopener">Official Kings news ↗</a></div></section>
-      <section class="page" id="page-tracker"><div class="pagehead"><p class="eyebrow">ROSTER MOVES</p><h1>Trade Tracker</h1><p>Confirmed trades, signings, waivers, recalls and official transactions.</p></div><div class="card"><div id="transactions" class="list"><p class="muted">Transactions are not exposed consistently by the public feeds used here. See official team news for confirmed moves.</p><a class="source-link" href="https://www.nhl.com/kings/news" target="_blank" rel="noopener">Official transactions & news ↗</a></div></div></section>
-      <section class="page" id="page-watch"><div class="pagehead"><p class="eyebrow">BROADCAST GUIDE</p><h1>Watch & Listen</h1><p>Broadcast details vary by game and location.</p></div><div class="card"><p class="muted">Use the game schedule for local puck-drop times. Broadcast and streaming rights vary by region; verify the listing for each matchup.</p><a class="source-link" href="https://www.nhl.com/kings" target="_blank" rel="noopener">Official Kings coverage ↗</a></div></section>
-      <section class="page" id="page-prospects"><div class="pagehead"><p class="eyebrow">NEXT GENERATION</p><h1>Prospects</h1><p>Ontario Reign, draft picks and developing players.</p></div><div class="card"><p class="muted">The NHL club roster feed does not represent the full prospect pool or AHL roster. This section is reserved for verified prospect data.</p><a class="source-link" href="https://ontarioreign.com/" target="_blank" rel="noopener">Ontario Reign ↗</a></div></section>
+      <section class="page" id="page-standings"><div class="pagehead"><p class="eyebrow">LEAGUE TABLE</p><h1>Standings</h1><p>Switch between conference and full NHL standings.</p></div><div class="standings-tabs"><button class="standings-tab active" data-standings="conference">Conference</button><button class="standings-tab" data-standings="league">League</button></div><div class="card"><div id="standings-table" class="tablewrap">Loading standings…</div></div></section>
     </main>
   </div>
   <footer class="footer"><span>THE KING'S STRONGHOLD · UNOFFICIAL FAN PROJECT</span><span id="foot-status">Data provided by NHL public endpoints where available.</span></footer>

@@ -2,6 +2,7 @@
 @media(max-width:720px){.layout{display:block}.sidebar{display:none}.main{padding:10px}.mobile-nav{display:block;margin-bottom:10px}.mobile-nav select{width:100%;padding:10px}.topbar{padding:0 13px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.columns{grid-template-columns:1fr}.hero{padding:14px}.matchup{padding:18px 0}.team-mark{width:47px;height:47px;font-size:25px}.pagehead h1{font-size:24px}.footer{font-size:8px;flex-direction:column}.hollywood{opacity:.11}.brand b{font-size:17px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
 /* Team marks: NHL-hosted SVG assets */
 .team-logo{width:26px;height:26px;object-fit:contain;vertical-align:middle;margin-right:8px;filter:drop-shadow(0 2px 5px #0008)}
-.opponent-logo{display:block;width:46px;height:46px;object-fit:contain;margin:0 auto 8px;filter:drop-shadow(0 2px 8px #0009)}
+.opponent-logo{display:block;width:58px;height:58px;object-fit:contain;transform:scale(1.28);transform-origin:center;margin:0 auto 8px;filter:drop-shadow(0 2px 8px #0009)}
 #opponent-name{display:flex;flex-direction:column;align-items:center;gap:4px}
 table td{vertical-align:middle}
+.standings-tabs{display:flex;gap:8px;margin:0 0 14px}.standings-tab{background:#111319;color:#aeb3bc;border:1px solid #34363e;border-radius:9px;padding:10px 18px;font:inherit;cursor:pointer}.standings-tab.active{background:#e5e7eb;color:#101116;border-color:#e5e7eb}.overview-standings{margin-top:18px}
