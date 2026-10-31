@@ -6,7 +6,7 @@ const state={schedule:[],roster:[],standings:[],watch:new Set(JSON.parse(localSt
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const dateFmt=s=>s?new Date(s).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}):"Time TBA";
 const num=(n,d=1)=>Number.isFinite(Number(n))?Number(n).toFixed(d):"—";
-const logoUrl=abbr=>`https://assets.nhle.com/logos/nhl/svg/${String(abbr||"").toUpperCase()}_dark.svg`;
+const logoUrl=abbr=>`https://assets.nhle.com/logos/nhl/svg/${String(abbr||"").toUpperCase()}.svg`;
 const teamLogo=(abbr,name,cls="team-logo")=>`<img class="${cls}" src="${logoUrl(abbr)}" alt="${esc(name||abbr||"NHL team")} logo" loading="lazy" onerror="this.style.display='none'">`;
 
 async function get(path){
