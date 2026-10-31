@@ -1,5 +1,5 @@
 const API_BASE="https://api-web.nhle.com/v1";
-const PROXIES=[url=>url,url=>`https://corsproxy.io/?url=${encodeURIComponent(url)}`,url=>`https://proxy.cors.dev/${url}`];
+const PROXIES=[url=>`https://proxy.cors.dev/${url}`,url=>`https://corsproxy.io/?url=${encodeURIComponent(url)}`];
 const TEAM="LAK";
 const $=id=>document.getElementById(id);
 const state={schedule:[],roster:[],standings:[],watch:new Set(JSON.parse(localStorage.getItem("kings-watchlist")||"[]"))};
@@ -14,7 +14,7 @@ async function get(path){
   let lastError;
   for(const makeUrl of PROXIES){
     const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),10000);
+    const timeout=setTimeout(()=>controller.abort(),6000);
     try{
       const r=await fetch(makeUrl(target),{headers:{Accept:"application/json"},signal:controller.signal,cache:"no-store",mode:"cors"});
       if(!r.ok)throw Error(`Feed returned ${r.status}`);
@@ -54,6 +54,6 @@ function renderWatchlist(){const players=state.roster.filter(p=>state.watch.has(
 async function loadClubStats(){try{const d=await get("/club-stats/LAK/now");const s=d?.skaters||[];const goals=s.reduce((a,p)=>a+(p.goals||0),0);const games=Math.max(1,...s.map(p=>p.gamesPlayed||0));$("gpg").textContent=num(goals/games);return true}catch(e){console.warn(e)}}
 async function loadHeadToHead(){const ab=$("opponentSelect").value;if(!ab)return;const matches=state.schedule.filter(g=>(g.homeTeam?.abbrev===ab||g.awayTeam?.abbrev===ab)&&g.gameState==="FINAL").slice(-5).reverse();renderRows($("headtohead"),matches.map(g=>[`${dateFmt(g.startTimeUTC)} · ${g.homeTeam?.abbrev} vs ${g.awayTeam?.abbrev}`,`${g.homeTeam?.score??0}–${g.awayTeam?.score??0}`]));if(!matches.length)renderRows($("headtohead"),[["No completed matchup found in loaded schedule","—"]])}
 function initOpponent(){const teams=[...new Map(state.schedule.flatMap(g=>[g.homeTeam,g.awayTeam]).filter(t=>t?.abbrev&&t.abbrev!=="LAK").map(t=>[t.abbrev,t])).values()].sort((a,b)=>a.abbrev.localeCompare(b.abbrev));$("opponentSelect").innerHTML=teams.map(t=>`<option value="${esc(t.abbrev)}">${esc(t.placeName?.default||t.name?.default||t.abbrev)}</option>`).join("");$("opponentSelect").addEventListener("change",loadHeadToHead);loadHeadToHead()}
-async function boot(){setStatus("Connecting to NHL public data…");const results=await Promise.allSettled([loadSchedule(),loadStandings(),loadClubStats(),loadScore()]);const good=results.some(r=>r.status==="fulfilled"&&r.value===true);if(good){setStatus("NHL data loaded where available. Refreshes automatically every 5 minutes.",true);$("updated").textContent=new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}else setStatus("NHL data could not be reached. Use refresh or the official Kings schedule.");}
+async function boot(){setStatus("Connecting to NHL public data…");const results=await Promise.allSettled([loadSchedule(),loadStandings(),loadClubStats(),loadScore()]);const good=results.some(r=>r.status==="fulfilled"&&r.value===true);if(good){setStatus("NHL data loaded where available. Refreshes automatically every 5 minutes.",true);$("updated").textContent=new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})}else setStatus("NHL feed connection failed. Tap refresh to retry, or open the official Kings schedule.");}
 $("refreshSchedule").addEventListener("click",loadSchedule);
 boot();setInterval(boot,300000);
