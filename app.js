@@ -1,4 +1,4 @@
-const API="https://api-web.nhle.com/v1";
+const API="https://proxy.cors.dev/https://api-web.nhle.com/v1";
 const TEAM="LAK";
 const $=id=>document.getElementById(id);
 const state={schedule:[],roster:[],standings:[],watch:new Set(JSON.parse(localStorage.getItem("kings-watchlist")||"[]"))};
